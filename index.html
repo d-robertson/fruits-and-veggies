@@ -6,21 +6,30 @@
         <link rel="stylesheet" href="css/style.css">
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular.min.js"></script>
-        <script src="js/fruits_and_veggies_test.js"></script>
+        <script src="js/fruits_and_veggies.js"></script>
         <script src="js/app.js"></script>
     </head>
-    <body>
+    <body ng-app="FandV" ng-controller="appCtrl">
         <div class="container">
             <h1>Fruit and Veggies</h1>
             <div class="row">
                 <div class="col-sm-4">
-                    col 1
+                    fruits
+                    <div class="well" ng-repeat="fruit in fruits track by $index" ng-class="{'red': checkCorrect(fruit, 'fruits')}">
+                      {{fruit}}<button ng-click="click('both', $index, 'fruits')">--></button>
+                    </div>
                 </div>
                 <div class="col-sm-4">
-                    col 2
+                    both
+                    <div class="well" ng-repeat="thing in both track by $index">
+                      <button ng-click="click('fruits', $index, 'both')"><--</button>{{thing}}<button ng-click="click('vegetables', $index, 'both')">--></button>
+                    </div>  
                 </div>
                 <div class="col-sm-4">
-                    col 3
+                    veggies
+                    <div class="well" ng-repeat="vegetable in vegetables track by $index" ng-class="{'red': checkCorrect(vegetable, 'vegetables')}">
+                      <button ng-click="click('both', $index, 'vegetables')"><--</button>{{vegetable}}
+                    </div>
                 </div>
             </div>
         </div>
