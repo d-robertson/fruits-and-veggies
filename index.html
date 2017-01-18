@@ -6,32 +6,70 @@
         <link rel="stylesheet" href="css/style.css">
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular.min.js"></script>
-        <script src="js/fruits_and_veggies.js"></script>
+        <script src="js/fruits_and_veggies_test.js"></script>
         <script src="js/app.js"></script>
     </head>
-    <body ng-app="FandV" ng-controller="appCtrl">
-        <div class="container">
+    <body ng-app="myApp">
+        <div class="container" ng-controller="myCtrl">
             <h1>Fruit and Veggies</h1>
+            <button class="btn btn-success" ng-click="checkAnswers()">Check answers</button>
             <div class="row">
-                <div class="col-sm-4">
-                    fruits
-                    <div class="well" ng-repeat="fruit in fruits track by $index" ng-class="{'red': checkCorrect(fruit, 'fruits')}">
-                      {{fruit}}<button ng-click="click('both', $index, 'fruits')">--></button>
+                <div class="col-sm-4 text-center">
+                    <h2>Fruits</h2>
+                    <div class="well" ng-repeat="fruit in fruits track by $index" ng-class="{red: check('fruits', fruit)}">
+                        <div class="row">
+                            <button class="col-xs-12 btn" ng-click="moveUp(fruits, $index, 'fruits')">&uarr;</button>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6 text-center">
+                                <h3>{{fruit}}</h3>
+                            </div>
+                            <div class="col-xs-6 text-center">
+                                <button ng-click="click('pool', $index, 'fruits')" class="btn toPool">&rarr;</button>
+                            </div>
+                        </div> 
+                        <div class="row">
+                            <button class="col-xs-12 btn" ng-click="moveDown(fruits, $index, 'fruits')">&darr;</button>
+                        </div>
                     </div>
                 </div>
-                <div class="col-sm-4">
-                    both
-                    <div class="well" ng-repeat="thing in both track by $index">
-                      <button ng-click="click('fruits', $index, 'both')"><--</button>{{thing}}<button ng-click="click('vegetables', $index, 'both')">--></button>
-                    </div>  
+                <div class="col-sm-4 text-center">
+                    <h2>Pool</h2>
+                    <div class="well" ng-repeat="item in pool track by $index">
+                        <div class="row">
+                            <div class="col-xs-4 text-center">
+                                <button ng-click="click('fruits', $index, 'pool')" class="btn toFruits">&larr;</button>
+                            </div>
+                            <div class="col-xs-4 text-center">
+                                <h3>{{item}}</h3>
+                            </div>
+                            <div class="col-xs-4 text-center">
+                                <button ng-click="click('veggies', $index, 'pool')" class="btn toVeggies">&rarr;</button>
+                            </div>
+                        </div> 
+                    </div>
                 </div>
-                <div class="col-sm-4">
-                    veggies
-                    <div class="well" ng-repeat="vegetable in vegetables track by $index" ng-class="{'red': checkCorrect(vegetable, 'vegetables')}">
-                      <button ng-click="click('both', $index, 'vegetables')"><--</button>{{vegetable}}
+                <div class="col-sm-4 text-center">
+                    <h2>Veggies</h2>
+                    <div class="well" ng-repeat="veggie in veggies track by $index" ng-class="{red: check('vegetables', veggie)}">
+                        <div class="row">
+                            <button class="col-xs-12 btn" ng-click="moveUp(veggies, $index, 'veggies')" >&uarr;</button>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6 text-center">
+                                <button ng-click="click('pool', $index, 'veggies')" class="btn toPool">&larr;</button>
+                            </div>
+                            <div class="col-xs-6 text-center">
+                                <h3>{{veggie}}</h3>
+                            </div>
+                        </div> 
+                        <div class="row">
+                            <button class="col-xs-12 btn" ng-click="moveDown(veggies, $index, 'veggies')">&darr;</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </body>
 </html>
+
